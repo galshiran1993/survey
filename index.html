@@ -425,26 +425,36 @@
 </div>
 
 <script>
+function showPage(pageId) {
+    var pages = ['introPage', 'surveyPage1', 'surveyPage2', 'resultsPage'];
+    pages.forEach(function(page) {
+        document.getElementById(page).classList.add('hidden');
+    });
+    document.getElementById(pageId).classList.remove('hidden');
+}
+
     var responses1 = {}; // To store responses from the first set
     var responses2 = {}; // To store responses from the second set
     var questionKeys = ['family', 'marriage', 'parenting', 'friends', 'work', 'education', 'fun', 'spirit', 'commun', 'health', 'envio', 'art'];
 
-    document.getElementById('form1').addEventListener('submit', function(e) {
-        e.preventDefault();
-        questionKeys.forEach(function(key) {
-            responses1[key] = document.getElementById(key).value;
-        });
-        showPage('surveyPage2');
+document.getElementById('form1').addEventListener('submit', function(e) {
+    e.preventDefault();
+    questionKeys.forEach(function(key) {
+        var selectedValue = document.querySelector('input[name="' + key + '"]:checked').value;
+        responses1[key] = selectedValue;
     });
+    showPage('surveyPage2');
+});
 
-    document.getElementById('form2').addEventListener('submit', function(e) {
-        e.preventDefault();
-        questionKeys.forEach(function(key) {
-            responses2[key] = document.getElementById(key + '2').value;
-        });
-        generateChart();
-        showPage('resultsPage');
+document.getElementById('form2').addEventListener('submit', function(e) {
+    e.preventDefault();
+    questionKeys.forEach(function(key) {
+        var selectedValue = document.querySelector('input[name="' + key + '2"]:checked').value;
+        responses2[key] = selectedValue;
     });
+    generateChart();
+    showPage('resultsPage');
+});
 
     function showPage(pageId) {
         var pages = ['introPage', 'surveyPage1', 'surveyPage2', 'resultsPage'];
