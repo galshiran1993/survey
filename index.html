@@ -3,39 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Survey</title>
-<style>
-    .hidden { display: none; }
-    form div { margin-bottom: 10px; }
-    body { text-align: right; } 
+    <style>
+        .hidden { display: none; }
+        .page { display: none; } /* Added for hiding pages initially */
+        form div { margin-bottom: 10px; }
+        body { text-align: right; } 
 
-    .question .scale label {
-        display: inline-block;
-        margin: 0 5px;
-        padding: 5px;
-        border: 1px solid #ddd;
-        text-align: center;
-    }
+        .question .scale label {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
 
-    .question .scale label:hover {
-        background-color: #f0f0f0;
-        cursor: pointer;
-    }
+        .question .scale label:hover {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
 
-    .question .scale input[type="radio"] {
-        display: none;
-    }
+        .question .scale input[type="radio"] {
+            display: none;
+        }
 
-    .question .scale input[type="radio"]:checked + label {
-        background-color: #b3d4fc;
-        border-color: #339af0;
-    }
-</style>
+        .question .scale input[type="radio"]:checked + label {
+            background-color: #b3d4fc;
+            border-color: #339af0;
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
     <!-- Introduction Page -->
-<div id="introPage">
+<div id="introPage" class="page">
     <h2>Introduction</h2>
     <p>השאלון מורכב משני חלקים, כאשר החלק הראשון מוקדש להגדרת הערכים שלך. החלק השני מתייחס לאיך בפועל אתה מתנהג בהתאם לערכים שלך.</p>
     <p>ההנחיות למילוי השאלון- עדיף למלא לבד, כדי שאפשר יהיה לענות בכנות ככל שניתן, לשים בצד כמה שניתן לחצים חברתיים ואת האמירות המנטליות של "צריך" ו"צריך", זה בינך לבין עצמך. אם אתם מוצאים את עצמכם מלקים את עצמכם במהלך המילוי, צעדו אחורה והזכירו לעצמכם שערכים הם מה שאתם בוחרים לעבוד לקראתו, לא מה שהמוח אומר שאתם צריכים לעשות או לדאוג לו או משהו אחר.</p>
@@ -48,7 +49,7 @@
 
 
 <!-- First Set of Questions -->
-<div id="surveyPage1" class="hidden">
+<div id="surveyPage1" class="page hidden">
     <h2>דרגו את רמת החשיבות של תחום החיים בעיניכם בסולם של 1-10</h2>
     <form id="form1">
         <div class="question">
@@ -231,14 +232,14 @@
                 <label><input type="radio" name="art" value="10"> 10</label>
             </div>
         </div>
-            <button type="submit">לעמוד הבא</button>
+            <button onclick="showPage('surveyPage2')">לעמוד הבא</button>
 </form>
 </div>
 
 
 
 <!-- Second Set of Questions -->
-<div id="surveyPage2" class="hidden">
+<div id="surveyPage2" class="page hidden">
     <h2> דרגו את מידת עקביות הפעולות שלכם עם הערכים בכל אחד מהתחומים הללו לפי השבוע האחרון בסולם של 1-10</h2>
     <form id="form2">
         <div class="question">
@@ -421,12 +422,12 @@
                 <label><input type="radio" name="art" value="10"> 10</label>
             </div>
         </div>
-    <button type="submit">לתוצאות</button>
+    <button onclick="showPage('resultsPage')">לתוצאות</button>
 </form>
 </div>
 
     <!-- Results Page -->
-<div id="resultsPage" class="hidden">
+<div id="resultsPage" class="page hidden">
     <h2>תוצאות</h2>
     <canvas id="resultsChart"></canvas>
 </div>
@@ -434,11 +435,11 @@
 <script>
     // Function to show a specific page
     function showPage(pageId) {
-        var pages = ['introPage', 'surveyPage1', 'surveyPage2', 'resultsPage'];
+        var pages = document.querySelectorAll('.page');
         pages.forEach(function(page) {
-            document.getElementById(page).classList.add('hidden');
+            page.style.display = 'none';
         });
-        document.getElementById(pageId).classList.remove('hidden');
+        document.getElementById(pageId).style.display = 'block';
     }
 
     var responses1 = {}; // To store responses from the first set
@@ -497,3 +498,5 @@
         });
     }
 </script>
+</body>
+</html>
