@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey</title>
+    <style>
+        .hidden { display: none; }
+        form div { margin-bottom: 10px; }
+        body { text-align: right; } 
+    .question .scale label {
+        display: inline-block;
+        margin: 0 5px;
+        padding: 5px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    .question .scale label:hover {
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
+
+    .question .scale input[type="radio"] {
+        display: none;
+    }
+
+    .question .scale input[type="radio"]:checked + label {
+        background-color: #b3d4fc;
+        border-color: #339af0;
+    }
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Introduction Page -->
+<div id="introPage">
+    <h2>Introduction</h2>
+    <p>השאלון מורכב משני חלקים, כאשר החלק הראשון מוקדש להגדרת הערכים שלך. החלק השני מתייחס לאיך בפועל אתה מתנהג בהתאם לערכים שלך.</p>
+    <p>ההנחיות למילוי השאלון- עדיף למלא לבד, כדי שאפשר יהיה לענות בכנות ככל שניתן, לשים בצד כמה שניתן לחצים חברתיים ואת האמירות המנטליות של "צריך" ו"צריך", זה בינך לבין עצמך. אם אתם מוצאים את עצמכם מלקים את עצמכם במהלך המילוי, צעדו אחורה והזכירו לעצמכם שערכים הם מה שאתם בוחרים לעבוד לקראתו, לא מה שהמוח אומר שאתם צריכים לעשות או לדאוג לו או משהו אחר.</p>
+    <p>החלק הראשון השאלון כולל 12 תחומי חיים שיכולים להוות ערכים עבור אנשים מסוימים. דרג את החשיבות של כל תחום (על ידי הקף מספר) בסולם של 1-10. 1 אומר שהתחום אינו חשוב כלל. 10 אומר שהתחום חשוב מאוד. לא לכולם יהיו ערכים בולטים בכל התחומים הללו, או שיהיה אכפת מכל התחומים באותה מידה. דרג כל תחום לפי תחושת החשיבות האישית שלך.</p>
+    <p>בחלק השני של השאלון נרצה לתת דירוג של מידת עקביות הפעולות שלנו עם הערכים בכל אחד מהתחומים הללו. אנחנו לא שואלים על האידיאל בכל תחום. אנחנו גם לא שואלים מה אחרים חושבים עליך. כולם מצליחים יותר בתחומים מסוימים מאשר באחרים. אנשים גם מצליחים לפעמים יותר מאשר בזמנים אחרים. אנחנו רוצים לדעת איך אתם חושבים שהלך לכם במהלך השבוע האחרון.</p>
+    <p>זהו תהליך גילוי לא תהליך ביקורת, ואחרי הכל, יצאתם למסע הזה - תנו לעצמכם קצת קרדיט על כך. אתם כאן כדי לאמץ את השינוי.</p>
+    <p>אם ציינתם בלא מעט מהתחומים כנמוכים בחשיבותם עבורכם, עליכם לשקול האם הייתם כנים עם עצמכם לגביהם. זה הגיוני לחלוטין שיהיו כמה תחומים שאינם חשובים. אולי לא אכפת לנו מהקהילתיות, או מהסביבה, ואם אין לנו ילדים, אולי לא אכפת לך משיטות ההורות של אחרים וכו'. עם זאת, מחקרים מראים שאם רבים מהתחומים הללו אינם חשובים, זה מרמז על מצוקה פסיכולוגית. השתמש בהערכה זו כהזדמנות להודות בפני עצמך בערכים האמיתיים שלך.</p>
+    <button onclick="showPage('surveyPage1')">התחלת הסקר</button>
+</div>
+
+
+<!-- First Set of Questions -->
+<div id="surveyPage1" class="hidden">
+    <h2>דרגו את רמת החשיבות של תחום החיים בעיניכם בסולם של 1-10</h2>
+    <form id="form1">
+        <div class="question">
+            <p>משפחה (מלבד נישואים או זוגיות):</p>
+            <div class="scale">
+                <label><input type="radio" name="family" value="1"> 1</label>
+                <label><input type="radio" name="family" value="2"> 2</label>
+                <label><input type="radio" name="family" value="3"> 3</label>
+                <label><input type="radio" name="family" value="4"> 4</label>
+                <label><input type="radio" name="family" value="5"> 5</label>
+                <label><input type="radio" name="family" value="6"> 6</label>
+                <label><input type="radio" name="family" value="7"> 7</label>
+                <label><input type="radio" name="family" value="8"> 8</label>
+                <label><input type="radio" name="family" value="9"> 9</label>
+                <label><input type="radio" name="family" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>נישואים/זוגיות/יחסים:</p>
+            <div class="scale">
+                <label><input type="radio" name="marriage" value="1"> 1</label>
+                <label><input type="radio" name="marriage" value="2"> 2</label>
+                <label><input type="radio" name="marriage" value="3"> 3</label>
+                <label><input type="radio" name="marriage" value="4"> 4</label>
+                <label><input type="radio" name="marriage" value="5"> 5</label>
+                <label><input type="radio" name="marriage" value="6"> 6</label>
+                <label><input type="radio" name="marriage" value="7"> 7</label>
+                <label><input type="radio" name="marriage" value="8"> 8</label>
+                <label><input type="radio" name="marriage" value="9"> 9</label>
+                <label><input type="radio" name="marriage" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>הורות:</p>
+            <div class="scale">
+                <label><input type="radio" name="parenting" value="1"> 1</label>
+                <label><input type="radio" name="parenting" value="2"> 2</label>
+                <label><input type="radio" name="parenting" value="3"> 3</label>
+                <label><input type="radio" name="parenting" value="4"> 4</label>
+                <label><input type="radio" name="parenting" value="5"> 5</label>
+                <label><input type="radio" name="parenting" value="6"> 6</label>
+                <label><input type="radio" name="parenting" value="7"> 7</label>
+                <label><input type="radio" name="parenting" value="8"> 8</label>
+                <label><input type="radio" name="parenting" value="9"> 9</label>
+                <label><input type="radio" name="parenting" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>חברים/חיי חברה:</p>
+            <div class="scale">
+                <label><input type="radio" name="friends" value="1"> 1</label>
+                <label><input type="radio" name="friends" value="2"> 2</label>
+                <label><input type="radio" name="friends" value="3"> 3</label>
+                <label><input type="radio" name="friends" value="4"> 4</label>
+                <label><input type="radio" name="friends" value="5"> 5</label>
+                <label><input type="radio" name="friends" value="6"> 6</label>
+                <label><input type="radio" name="friends" value="7"> 7</label>
+                <label><input type="radio" name="friends" value="8"> 8</label>
+                <label><input type="radio" name="friends" value="9"> 9</label>
+                <label><input type="radio" name="friends" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>עבודה:</p>
+            <div class="scale">
+                <label><input type="radio" name="work" value="1"> 1</label>
+                <label><input type="radio" name="work" value="2"> 2</label>
+                <label><input type="radio" name="work" value="3"> 3</label>
+                <label><input type="radio" name="work" value="4"> 4</label>
+                <label><input type="radio" name="work" value="5"> 5</label>
+                <label><input type="radio" name="work" value="6"> 6</label>
+                <label><input type="radio" name="work" value="7"> 7</label>
+                <label><input type="radio" name="work" value="8"> 8</label>
+                <label><input type="radio" name="work" value="9"> 9</label>
+                <label><input type="radio" name="work" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>השכלה:</p>
+            <div class="scale">
+                <label><input type="radio" name="education" value="1"> 1</label>
+                <label><input type="radio" name="education" value="2"> 2</label>
+                <label><input type="radio" name="education" value="3"> 3</label>
+                <label><input type="radio" name="education" value="4"> 4</label>
+                <label><input type="radio" name="education" value="5"> 5</label>
+                <label><input type="radio" name="education" value="6"> 6</label>
+                <label><input type="radio" name="education" value="7"> 7</label>
+                <label><input type="radio" name="education" value="8"> 8</label>
+                <label><input type="radio" name="education" value="9"> 9</label>
+                <label><input type="radio" name="education" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>בילוי/כיף:</p>
+            <div class="scale">
+                <label><input type="radio" name="fun" value="1"> 1</label>
+                <label><input type="radio" name="fun" value="2"> 2</label>
+                <label><input type="radio" name="fun" value="3"> 3</label>
+                <label><input type="radio" name="fun" value="4"> 4</label>
+                <label><input type="radio" name="fun" value="5"> 5</label>
+                <label><input type="radio" name="fun" value="6"> 6</label>
+                <label><input type="radio" name="fun" value="7"> 7</label>
+                <label><input type="radio" name="fun" value="8"> 8</label>
+                <label><input type="radio" name="fun" value="9"> 9</label>
+                <label><input type="radio" name="fun" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>רוחניוות:</p>
+            <div class="scale">
+                <label><input type="radio" name="spirit" value="1"> 1</label>
+                <label><input type="radio" name="spirit" value="2"> 2</label>
+                <label><input type="radio" name="spirit" value="3"> 3</label>
+                <label><input type="radio" name="spirit" value="4"> 4</label>
+                <label><input type="radio" name="spirit" value="5"> 5</label>
+                <label><input type="radio" name="spirit" value="6"> 6</label>
+                <label><input type="radio" name="spirit" value="7"> 7</label>
+                <label><input type="radio" name="spirit" value="8"> 8</label>
+                <label><input type="radio" name="spirit" value="9"> 9</label>
+                <label><input type="radio" name="spirit" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>קהילתיות:</p>
+            <div class="scale">
+                <label><input type="radio" name="commun" value="1"> 1</label>
+                <label><input type="radio" name="commun" value="2"> 2</label>
+                <label><input type="radio" name="commun" value="3"> 3</label>
+                <label><input type="radio" name="commun" value="4"> 4</label>
+                <label><input type="radio" name="commun" value="5"> 5</label>
+                <label><input type="radio" name="commun" value="6"> 6</label>
+                <label><input type="radio" name="commun" value="7"> 7</label>
+                <label><input type="radio" name="commun" value="8"> 8</label>
+                <label><input type="radio" name="commun" value="9"> 9</label>
+                <label><input type="radio" name="commun" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>בריאות (אורח חיים, אימונים, שינה):</p>
+            <div class="scale">
+                <label><input type="radio" name="health" value="1"> 1</label>
+                <label><input type="radio" name="health" value="2"> 2</label>
+                <label><input type="radio" name="health" value="3"> 3</label>
+                <label><input type="radio" name="health" value="4"> 4</label>
+                <label><input type="radio" name="health" value="5"> 5</label>
+                <label><input type="radio" name="health" value="6"> 6</label>
+                <label><input type="radio" name="health" value="7"> 7</label>
+                <label><input type="radio" name="health" value="8"> 8</label>
+                <label><input type="radio" name="health" value="9"> 9</label>
+                <label><input type="radio" name="health" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>איכות סביבה/בעיות אקלים:</p>
+            <div class="scale">
+                <label><input type="radio" name="envio" value="1"> 1</label>
+                <label><input type="radio" name="envio" value="2"> 2</label>
+                <label><input type="radio" name="envio" value="3"> 3</label>
+                <label><input type="radio" name="envio" value="4"> 4</label>
+                <label><input type="radio" name="envio" value="5"> 5</label>
+                <label><input type="radio" name="envio" value="6"> 6</label>
+                <label><input type="radio" name="envio" value="7"> 7</label>
+                <label><input type="radio" name="envio" value="8"> 8</label>
+                <label><input type="radio" name="envio" value="9"> 9</label>
+                <label><input type="radio" name="envio" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>אומנות, ביטוי יצירתי, אסתטיקה:</p>
+            <div class="scale">
+                <label><input type="radio" name="art" value="1"> 1</label>
+                <label><input type="radio" name="art" value="2"> 2</label>
+                <label><input type="radio" name="art" value="3"> 3</label>
+                <label><input type="radio" name="art" value="4"> 4</label>
+                <label><input type="radio" name="art" value="5"> 5</label>
+                <label><input type="radio" name="art" value="6"> 6</label>
+                <label><input type="radio" name="art" value="7"> 7</label>
+                <label><input type="radio" name="art" value="8"> 8</label>
+                <label><input type="radio" name="art" value="9"> 9</label>
+                <label><input type="radio" name="art" value="10"> 10</label>
+            </div>
+        </div>
+
+
+<!-- Second Set of Questions -->
+<div id="surveyPage2" class="hidden">
+    <h2> דרגו את מידת עקביות הפעולות שלכם עם הערכים בכל אחד מהתחומים הללו לפי השבוע האחרון בסולם של 1-10</h2>
+    <form id="form2">
+        <div class="question">
+            <p>משפחה (מלבד נישואים או זוגיות):</p>
+            <div class="scale">
+                <label><input type="radio" name="family" value="1"> 1</label>
+                <label><input type="radio" name="family" value="2"> 2</label>
+                <label><input type="radio" name="family" value="3"> 3</label>
+                <label><input type="radio" name="family" value="4"> 4</label>
+                <label><input type="radio" name="family" value="5"> 5</label>
+                <label><input type="radio" name="family" value="6"> 6</label>
+                <label><input type="radio" name="family" value="7"> 7</label>
+                <label><input type="radio" name="family" value="8"> 8</label>
+                <label><input type="radio" name="family" value="9"> 9</label>
+                <label><input type="radio" name="family" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>נישואים/זוגיות/יחסים:</p>
+            <div class="scale">
+                <label><input type="radio" name="marriage" value="1"> 1</label>
+                <label><input type="radio" name="marriage" value="2"> 2</label>
+                <label><input type="radio" name="marriage" value="3"> 3</label>
+                <label><input type="radio" name="marriage" value="4"> 4</label>
+                <label><input type="radio" name="marriage" value="5"> 5</label>
+                <label><input type="radio" name="marriage" value="6"> 6</label>
+                <label><input type="radio" name="marriage" value="7"> 7</label>
+                <label><input type="radio" name="marriage" value="8"> 8</label>
+                <label><input type="radio" name="marriage" value="9"> 9</label>
+                <label><input type="radio" name="marriage" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>הורות:</p>
+            <div class="scale">
+                <label><input type="radio" name="parenting" value="1"> 1</label>
+                <label><input type="radio" name="parenting" value="2"> 2</label>
+                <label><input type="radio" name="parenting" value="3"> 3</label>
+                <label><input type="radio" name="parenting" value="4"> 4</label>
+                <label><input type="radio" name="parenting" value="5"> 5</label>
+                <label><input type="radio" name="parenting" value="6"> 6</label>
+                <label><input type="radio" name="parenting" value="7"> 7</label>
+                <label><input type="radio" name="parenting" value="8"> 8</label>
+                <label><input type="radio" name="parenting" value="9"> 9</label>
+                <label><input type="radio" name="parenting" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>חברים/חיי חברה:</p>
+            <div class="scale">
+                <label><input type="radio" name="friends" value="1"> 1</label>
+                <label><input type="radio" name="friends" value="2"> 2</label>
+                <label><input type="radio" name="friends" value="3"> 3</label>
+                <label><input type="radio" name="friends" value="4"> 4</label>
+                <label><input type="radio" name="friends" value="5"> 5</label>
+                <label><input type="radio" name="friends" value="6"> 6</label>
+                <label><input type="radio" name="friends" value="7"> 7</label>
+                <label><input type="radio" name="friends" value="8"> 8</label>
+                <label><input type="radio" name="friends" value="9"> 9</label>
+                <label><input type="radio" name="friends" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>עבודה:</p>
+            <div class="scale">
+                <label><input type="radio" name="work" value="1"> 1</label>
+                <label><input type="radio" name="work" value="2"> 2</label>
+                <label><input type="radio" name="work" value="3"> 3</label>
+                <label><input type="radio" name="work" value="4"> 4</label>
+                <label><input type="radio" name="work" value="5"> 5</label>
+                <label><input type="radio" name="work" value="6"> 6</label>
+                <label><input type="radio" name="work" value="7"> 7</label>
+                <label><input type="radio" name="work" value="8"> 8</label>
+                <label><input type="radio" name="work" value="9"> 9</label>
+                <label><input type="radio" name="work" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>השכלה:</p>
+            <div class="scale">
+                <label><input type="radio" name="education" value="1"> 1</label>
+                <label><input type="radio" name="education" value="2"> 2</label>
+                <label><input type="radio" name="education" value="3"> 3</label>
+                <label><input type="radio" name="education" value="4"> 4</label>
+                <label><input type="radio" name="education" value="5"> 5</label>
+                <label><input type="radio" name="education" value="6"> 6</label>
+                <label><input type="radio" name="education" value="7"> 7</label>
+                <label><input type="radio" name="education" value="8"> 8</label>
+                <label><input type="radio" name="education" value="9"> 9</label>
+                <label><input type="radio" name="education" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>בילוי/כיף:</p>
+            <div class="scale">
+                <label><input type="radio" name="fun" value="1"> 1</label>
+                <label><input type="radio" name="fun" value="2"> 2</label>
+                <label><input type="radio" name="fun" value="3"> 3</label>
+                <label><input type="radio" name="fun" value="4"> 4</label>
+                <label><input type="radio" name="fun" value="5"> 5</label>
+                <label><input type="radio" name="fun" value="6"> 6</label>
+                <label><input type="radio" name="fun" value="7"> 7</label>
+                <label><input type="radio" name="fun" value="8"> 8</label>
+                <label><input type="radio" name="fun" value="9"> 9</label>
+                <label><input type="radio" name="fun" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>רוחניוות:</p>
+            <div class="scale">
+                <label><input type="radio" name="spirit" value="1"> 1</label>
+                <label><input type="radio" name="spirit" value="2"> 2</label>
+                <label><input type="radio" name="spirit" value="3"> 3</label>
+                <label><input type="radio" name="spirit" value="4"> 4</label>
+                <label><input type="radio" name="spirit" value="5"> 5</label>
+                <label><input type="radio" name="spirit" value="6"> 6</label>
+                <label><input type="radio" name="spirit" value="7"> 7</label>
+                <label><input type="radio" name="spirit" value="8"> 8</label>
+                <label><input type="radio" name="spirit" value="9"> 9</label>
+                <label><input type="radio" name="spirit" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>קהילתיות:</p>
+            <div class="scale">
+                <label><input type="radio" name="commun" value="1"> 1</label>
+                <label><input type="radio" name="commun" value="2"> 2</label>
+                <label><input type="radio" name="commun" value="3"> 3</label>
+                <label><input type="radio" name="commun" value="4"> 4</label>
+                <label><input type="radio" name="commun" value="5"> 5</label>
+                <label><input type="radio" name="commun" value="6"> 6</label>
+                <label><input type="radio" name="commun" value="7"> 7</label>
+                <label><input type="radio" name="commun" value="8"> 8</label>
+                <label><input type="radio" name="commun" value="9"> 9</label>
+                <label><input type="radio" name="commun" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>בריאות (אורח חיים, אימונים, שינה):</p>
+            <div class="scale">
+                <label><input type="radio" name="health" value="1"> 1</label>
+                <label><input type="radio" name="health" value="2"> 2</label>
+                <label><input type="radio" name="health" value="3"> 3</label>
+                <label><input type="radio" name="health" value="4"> 4</label>
+                <label><input type="radio" name="health" value="5"> 5</label>
+                <label><input type="radio" name="health" value="6"> 6</label>
+                <label><input type="radio" name="health" value="7"> 7</label>
+                <label><input type="radio" name="health" value="8"> 8</label>
+                <label><input type="radio" name="health" value="9"> 9</label>
+                <label><input type="radio" name="health" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>איכות סביבה/בעיות אקלים:</p>
+            <div class="scale">
+                <label><input type="radio" name="envio" value="1"> 1</label>
+                <label><input type="radio" name="envio" value="2"> 2</label>
+                <label><input type="radio" name="envio" value="3"> 3</label>
+                <label><input type="radio" name="envio" value="4"> 4</label>
+                <label><input type="radio" name="envio" value="5"> 5</label>
+                <label><input type="radio" name="envio" value="6"> 6</label>
+                <label><input type="radio" name="envio" value="7"> 7</label>
+                <label><input type="radio" name="envio" value="8"> 8</label>
+                <label><input type="radio" name="envio" value="9"> 9</label>
+                <label><input type="radio" name="envio" value="10"> 10</label>
+            </div>
+        </div>
+        <div class="question">
+            <p>אומנות, ביטוי יצירתי, אסתטיקה:</p>
+            <div class="scale">
+                <label><input type="radio" name="art" value="1"> 1</label>
+                <label><input type="radio" name="art" value="2"> 2</label>
+                <label><input type="radio" name="art" value="3"> 3</label>
+                <label><input type="radio" name="art" value="4"> 4</label>
+                <label><input type="radio" name="art" value="5"> 5</label>
+                <label><input type="radio" name="art" value="6"> 6</label>
+                <label><input type="radio" name="art" value="7"> 7</label>
+                <label><input type="radio" name="art" value="8"> 8</label>
+                <label><input type="radio" name="art" value="9"> 9</label>
+                <label><input type="radio" name="art" value="10"> 10</label>
+            </div>
+        </div>
+
+    <!-- Results Page -->
+<div id="resultsPage" class="hidden">
+    <h2>תוצאות</h2>
+    <canvas id="resultsChart"></canvas>
+</div>
+
+<script>
+    var responses1 = {}; // To store responses from the first set
+    var responses2 = {}; // To store responses from the second set
+    var questionKeys = ['family', 'marriage', 'parenting', 'friends', 'work', 'education', 'fun', 'spirit', 'commun', 'health', 'envio', 'art'];
+
+    document.getElementById('form1').addEventListener('submit', function(e) {
+        e.preventDefault();
+        questionKeys.forEach(function(key) {
+            responses1[key] = document.getElementById(key).value;
+        });
+        showPage('surveyPage2');
+    });
+
+    document.getElementById('form2').addEventListener('submit', function(e) {
+        e.preventDefault();
+        questionKeys.forEach(function(key) {
+            responses2[key] = document.getElementById(key + '2').value;
+        });
+        generateChart();
+        showPage('resultsPage');
+    });
+
+    function showPage(pageId) {
+        var pages = ['introPage', 'surveyPage1', 'surveyPage2', 'resultsPage'];
+        pages.forEach(function(page) {
+            document.getElementById(page).classList.add('hidden');
+        });
+        document.getElementById(pageId).classList.remove('hidden');
+    }
+
+    function generateChart() {
+        var labels = ['משפחה', 'נישואים/זוגיות/יחסים', 'הורות', 'חברים/חיי חברה', 'עבודה', 'השכלה', 'בילוי/כיף', 'רוחניות', 'קהילתיות', 'בריאות - אורח חיים, אימונים, שינה', 'איכות סביבה/בעיות אקלים', 'אומנות, ביטוי יצירתי, אסטתיקה'];
+        var data1 = questionKeys.map(key => responses1[key]);
+        var data2 = questionKeys.map(key => responses2[key]);
+
+        var ctx = document.getElementById('resultsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'כמה הערך חשוב',
+                    data: data1,
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)'
+                }, {
+                    label: 'מידת העקביות בשבוע האחרון',
+                    data: data2,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+</script>
