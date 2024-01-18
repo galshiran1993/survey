@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Survey</title>
-    <style>
-        .hidden { display: none; }
-        form div { margin-bottom: 10px; }
-        body { text-align: right; } 
+<style>
+    .hidden { display: none; }
+    form div { margin-bottom: 10px; }
+    body { text-align: right; } 
+
     .question .scale label {
         display: inline-block;
         margin: 0 5px;
@@ -28,8 +29,7 @@
         background-color: #b3d4fc;
         border-color: #339af0;
     }
-
-    </style>
+</style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -432,38 +432,68 @@
 </div>
 
 <script>
-function showPage(pageId) {
-    var pages = ['introPage', 'surveyPage1', 'surveyPage2', 'resultsPage'];
-    pages.forEach(function(page) {
-        document.getElementById(page).classList.add('hidden');
+    // Function to show a specific page
+    function showPage(pageId) {
+        var pages = ['introPage', 'surveyPage1', 'surveyPage2', 'resultsPage'];
+        pages.forEach(function(page) {
+            document.getElementById(page).classList.add('hidden');
+        });
+        document.getElementById(pageId).classList.remove('hidden');
+    }
+
+    var responses1 = {}; // To store responses from the first set
+    var responses2 = {}; // To store responses from the second set
+    var questionKeys = ['family', 'marriage', 'parenting', 'friends', 'work', 'education', 'fun', 'spirit', 'commun', 'health', 'envio', 'art'];
+
+    // Event listener for the first form submission
+    document.getElementById('form1').addEventListener('submit', function(e) {
+        e.preventDefault();
+        questionKeys.forEach(function(key) {
+            var selectedValue = document.querySelector('input[name="' + key + '"]:checked').value;
+            responses1[key] = selectedValue;
+        });
+        showPage('surveyPage2');
     });
-    document.getElementById(pageId).classList.remove('hidden');
-}
 
-var responses1 = {}; // To store responses from the first set
-var responses2 = {}; // To store responses from the second set
-var questionKeys = ['family', 'marriage', 'parenting', 'friends', 'work', 'education', 'fun', 'spirit', 'commun', 'health', 'envio', 'art'];
-
-document.getElementById('form1').addEventListener('submit', function(e) {
-    e.preventDefault();
-    questionKeys.forEach(function(key) {
-        var selectedValue = document.querySelector('input[name="' + key + '"]:checked').value;
-        responses1[key] = selectedValue;
+    // Event listener for the second form submission
+    document.getElementById('form2').addEventListener('submit', function(e) {
+        e.preventDefault();
+        questionKeys.forEach(function(key) {
+            var selectedValue = document.querySelector('input[name="' + key + '2"]:checked').value;
+            responses2[key] = selectedValue;
+        });
+        generateChart();
+        showPage('resultsPage');
     });
-    showPage('surveyPage2');
-});
 
-document.getElementById('form2').addEventListener('submit', function(e) {
-    e.preventDefault();
-    questionKeys.forEach(function(key) {
-        var selectedValue = document.querySelector('input[name="' + key + '2"]:checked').value;
-        responses2[key] = selectedValue;
-    });
-    generateChart();
-    showPage('resultsPage');
-});
+    // Function to generate a chart with the survey results
+    function generateChart() {
+        var labels = ['משפחה', 'נישואים/זוגיות/יחסים', 'הורות', 'חברים/חיי חברה', 'עבודה', 'השכלה', 'בילוי/כיף', 'רוחניות', 'קהילתיות', 'בריאות - אורח חיים, אימונים, שינה', 'איכות סביבה/בעיות אקלים', 'אומנות, ביטוי יצירתי, אסטתיקה'];
+        var data1 = questionKeys.map(key => responses1[key]);
+        var data2 = questionKeys.map(key => responses2[key]);
 
-function generateChart() {
-    // Existing chart generation code
-}
+        var ctx = document.getElementById('resultsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'כמה הערך חשוב',
+                    data: data1,
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)'
+                }, {
+                    label: 'מידת העקביות בשבוע האחרון',
+                    data: data2,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
 </script>
