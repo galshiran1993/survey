@@ -437,9 +437,9 @@
     function showPage(pageId) {
         var pages = document.querySelectorAll('.page');
         pages.forEach(function(page) {
-            page.style.display = 'none';
+            page.classList.add('hidden');
         });
-        document.getElementById(pageId).style.display = 'block';
+        document.getElementById(pageId).classList.remove('hidden');
     }
 
     var responses1 = {}; // To store responses from the first set
@@ -460,7 +460,7 @@
     document.getElementById('form2').addEventListener('submit', function(e) {
         e.preventDefault();
         questionKeys.forEach(function(key) {
-            var selectedValue = document.querySelector('input[name="' + key + '2"]:checked').value;
+            var selectedValue = document.querySelector('input[name="' + key + '"]:checked').value;
             responses2[key] = selectedValue;
         });
         generateChart();
